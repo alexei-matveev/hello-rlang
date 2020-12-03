@@ -1,7 +1,12 @@
 #
 # https://rsqlite.r-dbi.org/
 #
-# aptitude install r-cran-dbi r-cran-rsqlite
+#     $ aptitude install r-cran-dbi r-cran-rsqlite
+#
+# For MySQL try:
+#
+#     $ aptitude install libmariadbclient-dev
+#     > install.packages("RMariaDB")
 #
 library(DBI)
 
