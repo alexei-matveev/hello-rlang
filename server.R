@@ -2,6 +2,7 @@
 # https://rosettacode.org/wiki/Hello_world/Web_server#R
 #
 # aptitude install r-cran-httpuv
+# aptitude install ess
 #
 library(httpuv)
 
