@@ -1,3 +1,4 @@
+#!/usr/bin/Rscript
 #
 # https://rosettacode.org/wiki/Hello_world/Web_server#R
 #

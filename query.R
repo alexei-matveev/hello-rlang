@@ -1,3 +1,4 @@
+#!/usr/bin/Rscript
 #
 # https://rsqlite.r-dbi.org/
 #
