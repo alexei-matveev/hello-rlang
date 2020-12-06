@@ -1,6 +1,7 @@
 #!/usr/bin/Rscript
 ##
-## Start the interpreter with M-R. Use C-c C-j to eval a line.
+## Start the interpreter  with M-R. Use C-c C-j to  eval a line, C-M-x
+## to eval a paragraph.
 ##
 
 ##
@@ -10,11 +11,11 @@
 ##
 ## In this  particular distribution  the increments are  usually small
 ## and positive or large and negative:
-prior <- c(1,2,3,4,4,4,5,7,7,-10,-20);
+prior <- c(1,1,1,1,1,1,1,1,1,-10);
 
 ## This outputs the frequency table:
 table (prior);
-mean (prior);                           # 0.6363636
+mean (prior);                           # -0.1
 ## plot (ecdf (prior), do.points = FALSE, verticals = TRUE);
 
 ## In case you want to exclude drift:
@@ -51,9 +52,10 @@ fivenum (sims);
 c (mean (sims),  day * mean (distr), day * mean (prior));
 
 ## Histograms
-hist (sim3[1, ], breaks = 50, prob = TRUE, xlab = "Min", xlim = c(-150, 150));
-hist (sim3[2, ], breaks = 50, prob = TRUE, xlab = "Sum", xlim = c(-150, 150));
-hist (sim3[3, ], breaks = 50, prob = TRUE, xlab = "Max", xlim = c(-150, 150));
+xlim <- c(-100, 100);
+hist (sim3[1, ], prob = TRUE, xlab = "Min", xlim = xlim);
+hist (sim3[2, ], prob = TRUE, xlab = "Sum", xlim = xlim);
+hist (sim3[3, ], prob = TRUE, xlab = "Max", xlim = xlim);
 ## lines (density (sim3[1, ], bw = 5));
 ## lines (density (sim3[3, ], bw = 5));
 
