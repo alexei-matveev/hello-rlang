@@ -1,7 +1,8 @@
 #### Packages
 
 See [Manuals](https://cran.r-project.org/manuals.html) for
-introduction.
+introduction. When you start asking questions about evaluation order
+read [this](http://adv-r.had.co.nz/Functions.html).
 
     $ aptitude install r-cran-httpuv
     $ aptitude install r-cran-dbi r-cran-rsqlite
