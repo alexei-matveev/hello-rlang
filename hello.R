@@ -33,20 +33,29 @@ plot (usage, type = "l");
 distr <- diff (usage);
 table (distr);
 mean (distr);
-# plot (table (distr));
+## plot (table (distr));
+
+## Min, Last,  and Max as  a few  observations derived from  a cusmsum
+## trajectory:
+f <- function (s) c (min (cumsum (s)), sum (s), max (cumsum (s)));
 
 ## Simulate the evolution over one day  many times. In fact you may be
 ## interested in the behaviour of max(cumsum(...)) or min(cumsum(...))
-## and not just sum(...):
-sims <- replicate (n = 100000, sum (sample (distr, size = day, replace = TRUE)));
+## and not  just sum(...). Since f()  returns a 3-vector the  shape of
+## the resulte is 3 x n:
+sim3 <- replicate (n = 10000, f (sample (distr, size = day, replace = TRUE)));
+sims <- sim3[2, ];
 fivenum (sims);
 ## The expectation value of a sum is  a multiple of that for the prior
 ## distribution:
 c (mean (sims),  day * mean (distr), day * mean (prior));
 
-## Histogram
-hist (sims, breaks = 50);           # , prob = TRUE);
-## lines (density (sims, bw = 5));
+## Histograms
+hist (sim3[1, ], breaks = 50, prob = TRUE, xlab = "Min", xlim = c(-150, 150));
+hist (sim3[2, ], breaks = 50, prob = TRUE, xlab = "Sum", xlim = c(-150, 150));
+hist (sim3[3, ], breaks = 50, prob = TRUE, xlab = "Max", xlim = c(-150, 150));
+## lines (density (sim3[1, ], bw = 5));
+## lines (density (sim3[3, ], bw = 5));
 
 ## Empirical cumulative distribution function:
 ## plot (ecdf (sims), do.points = FALSE, verticals = TRUE);
