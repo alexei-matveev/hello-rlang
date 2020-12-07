@@ -65,7 +65,7 @@ wip <- function (distr, size) {
     ## Trajectory maxima:
     sims <- sim3[3, ]
     ## Maybe compute a specific qauntile:
-    fivenums (sims)
+    print (fivenum (sims))
     ## For histograms return all of them:
     sim3
 }
