@@ -3,6 +3,13 @@
 ## Start the interpreter  with M-R. Use C-c C-j to  eval a line, C-M-x
 ## to eval a paragraph.
 ##
+## Back of the evelope calculation ... Say it takes 0.1s to simulate a
+## distribution  in  the  future  for   a  single  "disk  usage"  time
+## series. In 30s which is a timeout for a Zabbix Item you can only do
+## as many as 300 "disks", that is about 30-100 VMs max.  On the other
+## hand if we agree to simulate the future once an hour one can manage
+## several thousands VMs.
+##
 
 ##
 ## Simulating Data might be usefull as a tutorial [1].
@@ -44,7 +51,9 @@ f <- function (s) c (min (cumsum (s)), sum (s), max (cumsum (s)));
 ## interested in the behaviour of max(cumsum(...)) or min(cumsum(...))
 ## and not  just sum(...). Since f()  returns a 3-vector the  shape of
 ## the resulte is 3 x n:
-sim3 <- replicate (n = 10000, f (sample (distr, size = day, replace = TRUE)));
+system.time (
+    sim3 <- replicate (n = 10000, f (sample (distr, size = day, replace = TRUE)))
+)
 sims <- sim3[2, ];
 fivenum (sims);
 ## The expectation value of a sum is  a multiple of that for the prior
