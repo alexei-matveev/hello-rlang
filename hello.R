@@ -53,12 +53,29 @@ simulate <- function (distr, size) {
     f3 (sample (distr, size = day, replace = TRUE))
 }
 
+## We can reduce a ditribution to a single value in at least two ways:
+## (1) return a specific quantile like  median or 95th or (2) return a
+## probablity  measure  for  crossing  a  specific  threshold.   Which
+## threshold?  The  current "disk usage"  may change every  minute ---
+## you  dont  want  to  recompute that  probability  that  often.   So
+## reducing the future deistribution  to few quantiles for pre-defined
+## probabilities, like fivenums() does, is probably more practical.
+wip <- function (distr, size) {
+    sim3 <- replicate (n = 10000, simulate (distr, size = day))
+    ## Trajectory maxima:
+    sims <- sim3[3, ]
+    ## Maybe compute a specific qauntile:
+    fivenums (sims)
+    ## For histograms return all of them:
+    sim3
+}
+
 ## Simulate the evolution over one day  many times. In fact you may be
 ## interested in the behaviour of max(cumsum(...)) or min(cumsum(...))
 ## and not  just sum(...). Since f()  returns a 3-vector the  shape of
 ## the resulte is 3 x n:
 system.time (
-    sim3 <- replicate (n = 10000, simulate (distr, size = day))
+    sim3 <- wip (distr, day)
 )
 sims <- sim3[2, ];
 fivenum (sims);
