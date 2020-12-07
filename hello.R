@@ -45,14 +45,20 @@ mean (distr);
 
 ## Min, Last,  and Max as  a few  observations derived from  a cusmsum
 ## trajectory:
-f <- function (s) c (min (cumsum (s)), sum (s), max (cumsum (s)));
+f3 <- function (s) {
+    c (min (cumsum (s)), sum (s), max (cumsum (s)))
+}
+
+simulate <- function (distr, size) {
+    f3 (sample (distr, size = day, replace = TRUE))
+}
 
 ## Simulate the evolution over one day  many times. In fact you may be
 ## interested in the behaviour of max(cumsum(...)) or min(cumsum(...))
 ## and not  just sum(...). Since f()  returns a 3-vector the  shape of
 ## the resulte is 3 x n:
 system.time (
-    sim3 <- replicate (n = 10000, f (sample (distr, size = day, replace = TRUE)))
+    sim3 <- replicate (n = 10000, simulate (distr, size = day))
 )
 sims <- sim3[2, ];
 fivenum (sims);
